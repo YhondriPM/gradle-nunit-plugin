@@ -207,9 +207,10 @@ class NUnit extends ConventionTask {
             nunitCacheDir.mkdirs()
         }
         def nunitFolder = getCachedNunitDir()
-        if (!nunitFolder.exists()) {
+        println("ensureNunitInstalledt nunitFolder at: ${nunitFolder}")
+        //if (!nunitFolder.exists()) {
             downloadNUnit()
-        }
+        //}
     }
 
     @Internal
@@ -255,7 +256,7 @@ class NUnit extends ConventionTask {
         // special handling for nunit3 flat zip file
         def zipOutputDir = isV3 ? nunitCacheDirForVersion : getCacheDir()
         println("Saving downloaded NUnit at: ${zipOutputDir}")
-        
+
         project.logger.info "Downloading & Unpacking NUnit ${version} from ${nunitDownloadUrl}"
         project.extensions.getByType(DownloadExtension).run {
             src "$nunitDownloadUrl"

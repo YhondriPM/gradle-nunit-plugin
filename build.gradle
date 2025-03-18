@@ -11,6 +11,11 @@ apply plugin: 'com.gradle.plugin-publish'
 group = 'com.ullink.gradle'
 description 'gradle-nunit-plugin is a Gradle plugin that enables NUnit testing'
 
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+}
+
 dependencies {
     implementation 'de.undercouch:gradle-download-task:5.5.0'
     testImplementation 'xmlunit:xmlunit:1.6'

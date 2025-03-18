@@ -185,7 +185,7 @@ class NUnit extends ConventionTask {
         }
 
         String folderName = "bin/"
-        if (IsV317OrAbove) {
+        if (isV317OrAbove) {
             folderName = "bin/${nunitNetVersion}"
         } else if (isV316OrAbove){
             folderName = "bin/"

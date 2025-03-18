@@ -26,6 +26,9 @@ class NUnit extends ConventionTask {
     def nunitDownloadUrl
     @Optional
     @Input
+    def nunitNetVersion = "net8.0"
+    @Optional
+    @Input
     List testAssemblies
 
     @Optional
@@ -137,6 +140,12 @@ class NUnit extends ConventionTask {
     }
 
     @Internal
+    boolean getIsV317OrAbove() {
+        def (major, minor, patch) = getNunitVersion().tokenize('.')*.toInteger()
+        major == 3 && minor >= 17
+    }
+
+    @Internal
     String getGitHubRepoName() {
         if (isV35OrAbove) {
             return 'nunit-console'
@@ -176,7 +185,9 @@ class NUnit extends ConventionTask {
         }
 
         String folderName = "bin/"
-        if (isV316OrAbove){
+        if (IsV317OrAbove) {
+            folderName = "bin/${nunitNetVersion}"
+        } else if (isV316OrAbove){
             folderName = "bin/"
         } else if (isV310OrAbove) {
             folderName = "bin/net35/"
